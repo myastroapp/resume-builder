@@ -5,6 +5,40 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escA = (s) => String(s).replace(/"/g, "&quot;");
 
+const TEMPLATES = [
+  { id: "classic", name: "Classic", pro: false },
+  { id: "modern", name: "Modern", pro: true },
+  { id: "compact", name: "Compact", pro: true },
+  { id: "elegant", name: "Elegant", pro: true },
+];
+let current = (() => { try { return localStorage.getItem("cv_template") || "classic"; } catch (e) { return "classic"; } })();
+if (TEMPLATES.find((t) => t.id === current)?.pro && !isPro()) current = "classic";
+let pending = null;
+
+function renderTemplates() {
+  const box = $("templates");
+  box.innerHTML = "";
+  for (const t of TEMPLATES) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = t.name;
+    if (t.id === current) b.classList.add("active");
+    if (t.pro && !isPro()) { const tag = document.createElement("span"); tag.className = "pro-tag"; tag.textContent = "PRO"; b.appendChild(tag); }
+    b.addEventListener("click", () => selectTemplate(t.id));
+    box.appendChild(b);
+  }
+}
+function selectTemplate(id) {
+  const t = TEMPLATES.find((x) => x.id === id);
+  if (t.pro && !isPro()) { pending = id; openUnlock(); return; }
+  applyTemplate(id);
+}
+function applyTemplate(id) {
+  current = id;
+  try { localStorage.setItem("cv_template", id); } catch (e) {}
+  $("resume").className = "resume t-" + id;
+  renderTemplates();
+}
+
 function addExp(role = "", company = "", dates = "", desc = "") {
   const el = document.createElement("div");
   el.className = "entry";
@@ -71,6 +105,8 @@ const openUnlock = () => ($("unlock").hidden = false);
 const closeUnlock = () => ($("unlock").hidden = true);
 
 function wire() {
+  renderTemplates();
+  applyTemplate(current);
   addExp("Senior Engineer", "Acme Inc.", "2022–Present", "Led a team of 5 engineers\nShipped the flagship product to 1M+ users");
   addEdu("B.S. Computer Science", "State University", "2014–2018");
   document.querySelectorAll(".form input, .form textarea").forEach((i) => i.addEventListener("input", render));
@@ -82,8 +118,12 @@ function wire() {
   $("p-credit").title = "Remove this footer (Pro)";
   $("buy").href = BUY_URL;
   $("btn-code").addEventListener("click", () => {
-    if (tryUnlock($("code").value)) { closeUnlock(); render(); }
-    else { $("code").value = ""; $("code").placeholder = "Invalid code — check your receipt"; }
+    if (tryUnlock($("code").value)) {
+      closeUnlock();
+      if (pending) { applyTemplate(pending); pending = null; }
+      renderTemplates();
+      render();
+    } else { $("code").value = ""; $("code").placeholder = "Invalid code — check your receipt"; }
   });
   $("unlock-close").addEventListener("click", closeUnlock);
   $("unlock").addEventListener("click", (e) => { if (e.target.id === "unlock") closeUnlock(); });
