@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Resume Builder — Create &amp; Download a PDF Resume</title>
+  <meta name="description" content="Build a clean, professional resume and download it as a PDF in minutes. Free, no sign-up, runs in your browser — your data never leaves your device." />
+  <link rel="canonical" href="https://myastroapp.github.io/resume-builder/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Resume Builder" />
+  <meta property="og:title" content="Free Resume Builder" />
+  <meta property="og:description" content="Build a clean, professional resume and download a PDF in minutes. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/resume-builder/" />
+  <meta property="og:image" content="https://myastroapp.github.io/resume-builder/og-default.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/resume-builder/og-default.png" />
+  <meta name="theme-color" content="#0b6bcb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#0b6bcb;--border:#d0d7de;--soft:#f6f8fa;--ink:#111}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#6cb6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .topbar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:5;flex-wrap:wrap}
+    .logo{color:var(--accent);text-decoration:none;font-weight:700}.spacer{flex:1}
+    button{font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    .layout{display:grid;grid-template-columns:380px 1fr;align-items:start}@media(max-width:860px){.layout{grid-template-columns:1fr}}
+    .form{padding:16px 18px;border-right:1px solid var(--border)}
+    .form h3{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:18px 0 8px}
+    .form input,.form textarea{width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);margin-bottom:7px}
+    .row2{display:flex;gap:7px}.row2 input{flex:1}
+    .entry{border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px}
+    .entry .rm{padding:3px 8px;font-size:12px;float:right}
+    .preview-wrap{padding:24px;background:var(--soft);min-height:80vh}
+    .resume{background:#fff;color:var(--ink);max-width:760px;margin:0 auto;padding:46px 52px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.06);font-size:14px;line-height:1.5}
+    .r-name{font-size:30px;font-weight:800;letter-spacing:-.02em;margin:0}
+    .r-title{color:#444;font-size:16px;margin:2px 0 6px}
+    .r-contact{color:#555;font-size:13px}
+    .r-sec{margin-top:22px}.r-sec h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#0b6bcb;border-bottom:2px solid #eee;padding-bottom:3px;margin:0 0 8px}
+    .r-item{margin-bottom:12px}.r-item .h{display:flex;justify-content:space-between;font-weight:700}.r-item .sub{color:#555;font-style:italic;font-size:13px}
+    .r-item .desc{white-space:pre-wrap;margin-top:4px;font-size:13px}
+    .r-skills{display:flex;flex-wrap:wrap;gap:6px}.r-skills span{background:#eef3f8;border-radius:5px;padding:3px 9px;font-size:13px;color:#234}
+    .credit{margin-top:26px;text-align:center;color:#aaa;font-size:11px}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:50}.modal[hidden]{display:none}
+    .modal-card{position:relative;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:26px 28px;max-width:420px;width:calc(100% - 40px)}
+    .modal-card h2{margin:0 0 10px}.modal-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer}
+    .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 20px;border-radius:9px;font-weight:600}
+    .code-row{display:flex;gap:6px;margin-top:8px}.code-row input{flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg)}.small{color:var(--muted);font-size:13px}
+    @media print{body *{visibility:hidden}.resume,.resume *{visibility:visible}.resume{position:absolute;left:0;top:0;border:none;box-shadow:none;margin:0;width:100%;max-width:100%}.topbar,.form{display:none}.preview-wrap{padding:0;background:#fff}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="./">Resume Builder</a>
+    <span class="spacer"></span>
+    <button id="btn-print" class="primary">Download / Print PDF</button>
+  </div>
+  <div class="layout">
+    <div class="form">
+      <h3>Contact</h3>
+      <input id="name" placeholder="Full name" value="Your Name" />
+      <input id="role" placeholder="Professional title (e.g. Software Engineer)" value="Software Engineer" />
+      <div class="row2"><input id="email" placeholder="Email" value="you@example.com" /><input id="phone" placeholder="Phone" /></div>
+      <div class="row2"><input id="location" placeholder="Location" /><input id="links" placeholder="Website / LinkedIn" /></div>
+      <h3>Summary</h3>
+      <textarea id="summary" rows="3" placeholder="A short professional summary">Experienced professional with a track record of delivering results.</textarea>
+      <h3>Experience</h3>
+      <div id="exp"></div>
+      <button id="add-exp" type="button">+ Add experience</button>
+      <h3>Education</h3>
+      <div id="edu"></div>
+      <button id="add-edu" type="button">+ Add education</button>
+      <h3>Skills</h3>
+      <input id="skills" placeholder="Comma-separated, e.g. JavaScript, SQL, Leadership" value="JavaScript, TypeScript, SQL" />
+    </div>
+    <div class="preview-wrap">
+      <div class="resume" id="resume">
+        <h1 class="r-name" id="p-name">Your Name</h1>
+        <div class="r-title" id="p-role">Software Engineer</div>
+        <div class="r-contact" id="p-contact"></div>
+        <div class="r-sec" id="sec-summary"><h2>Summary</h2><div id="p-summary"></div></div>
+        <div class="r-sec" id="sec-exp"><h2>Experience</h2><div id="p-exp"></div></div>
+        <div class="r-sec" id="sec-edu"><h2>Education</h2><div id="p-edu"></div></div>
+        <div class="r-sec" id="sec-skills"><h2>Skills</h2><div class="r-skills" id="p-skills"></div></div>
+        <div class="credit" id="p-credit">Made with myastroapp.github.io/resume-builder</div>
+      </div>
+    </div>
+  </div>
+  <div id="unlock" class="modal" hidden>
+    <div class="modal-card">
+      <button id="unlock-close" class="modal-x" aria-label="Close">×</button>
+      <h2>Remove the footer credit</h2>
+      <p>Download a clean resume with no "made with" line. One-time <strong>$9</strong>, lifetime, runs in your browser.</p>
+      <a class="cta" id="buy" href="#" target="_blank" rel="noopener">Unlock for $9 →</a>
+      <p class="small">Already purchased? Enter your code:</p>
+      <div class="code-row"><input id="code" placeholder="CV-PRO-…" autocomplete="off" /><button id="btn-code">Unlock</button></div>
+    </div>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "Resume Builder",
+  "short_name": "Resume Builder",
+  "description": "Build a clean, professional resume and download a PDF in minutes. Free, in-browser.",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#0b6bcb",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
