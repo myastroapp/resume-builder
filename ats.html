@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free ATS Resume Checker — Match Your Resume to the Job (Private)</title>
+  <meta name="description" content="Paste your resume and a job description to see your keyword match score and the important keywords you're missing. Free ATS checker that runs in your browser — nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/resume-builder/ats.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ATS Resume Checker" />
+  <meta property="og:title" content="Free ATS Resume Checker" />
+  <meta property="og:description" content="Match your resume to a job description — keyword score + missing keywords. Free, private, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/resume-builder/ats.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/resume-builder/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/resume-builder/og-default.png" />
+  <meta name="theme-color" content="#0b6bcb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#0b6bcb;--border:#d0d7de;--soft:#f6f8fa;--good:#0a7d33;--bad:#c0341a}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#6cb6ff;--border:#30363d;--soft:#161b22;--good:#3fb950;--bad:#ff7b72}}
+    *{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px 50px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em}.sub{color:var(--muted);margin:0 0 18px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:240px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    #result{margin-top:22px;border:1px solid var(--border);border-radius:12px;padding:18px 20px;background:var(--soft)}
+    .scorewrap{display:flex;align-items:baseline;gap:10px}.scorewrap #score{font-size:40px;font-weight:800}.scorewrap .lbl{color:var(--muted)}
+    .grp{margin-top:14px}.grp h3{font-size:14px;margin:0 0 6px}
+    .kw{display:inline-block;padding:3px 9px;border-radius:6px;font-size:13px;margin:0 5px 5px 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+    .kw.good{background:rgba(10,125,51,.12);color:var(--good)}.kw.bad{background:rgba(192,52,26,.12);color:var(--bad)}
+    .muted{color:var(--muted)}
+    .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 20px;border-radius:9px;font-weight:600;margin-top:14px}
+    section.prose{margin:30px 0;color:var(--fg)}section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:36px;padding:22px 0 0;color:var(--muted);font-size:14px}a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">Resume Builder</a></header>
+    <h1>ATS Resume Checker</h1>
+    <p class="sub">Paste your resume and the job description. You'll get a keyword match score and the important terms you're missing — so you can tailor your resume before applying. Runs entirely in your browser; nothing is uploaded.</p>
+
+    <div class="cols">
+      <div><label for="resume">Your resume</label><textarea id="resume" spellcheck="false" placeholder="Paste your resume text here"></textarea></div>
+      <div><label for="jd">Job description</label><textarea id="jd" spellcheck="false" placeholder="Paste the job posting here"></textarea></div>
+    </div>
+
+    <div id="result" hidden>
+      <div class="scorewrap"><span id="score">0%</span><span class="lbl">keyword match</span></div>
+      <div class="grp"><h3>✓ Keywords you have</h3><div id="matched"></div></div>
+      <div class="grp"><h3>✗ Important keywords you're missing</h3><div id="missing"></div></div>
+      <a class="cta" href="./">Tailor your resume in the builder →</a>
+    </div>
+
+    <section class="prose">
+      <h2>How it works</h2>
+      <p>Most companies run resumes through an <strong>applicant tracking system (ATS)</strong> that screens for the skills and terms in the job posting before a human ever reads it. This tool pulls the most frequent meaningful keywords from the job description, then checks which appear in your resume. Add the missing ones <em>only where they're genuinely true of you</em>, using the exact wording from the posting — that's what raises your match.</p>
+      <h2>Tips</h2>
+      <ul>
+        <li>Mirror the posting's exact terms ("JavaScript" not "JS") — ATS keyword matching is literal.</li>
+        <li>Put key skills in your summary and a skills section, not only buried in bullets.</li>
+        <li>Never keyword-stuff or claim skills you don't have — a human reads it next.</li>
+      </ul>
+      <p>Then build the tailored version in the free <a href="./">resume builder</a> and add a matching <a href="cover-letter.html">cover letter</a>.</p>
+    </section>
+
+    <footer>
+      More tools: <a href="./">Resume builder</a> &nbsp;·&nbsp; <a href="cover-letter.html">Cover letter generator</a> &nbsp;·&nbsp; <a href="resume-skills.html">What skills to list</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+  <script type="module" src="ats.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ATS Resume Checker","url":"https://myastroapp.github.io/resume-builder/ats.html","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free ATS resume checker — paste your resume and a job description to get a keyword match score and the keywords you are missing. Private, in your browser."}</script>
+</body>
+</html>
