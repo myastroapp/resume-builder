@@ -14,3 +14,8 @@ Build a clean, professional resume and download it as a PDF in minutes — free,
 - One-time **Pro** unlocks 3 more professional templates (Modern, Compact, Elegant) and a clean no-footer PDF — one-time, not a subscription
 
 No watermark on the content, no sign-up, no data collection.
+
+## More free tools
+- [JSON & developer tools](https://myastroapp.github.io/json-viewer/) — viewer, formatter, converters, JWT, Base64, regex, and more
+- [Finance calculators](https://myastroapp.github.io/rental-calculator/) — rental property, mortgage, affordability, payoff
+- [Invoice / estimate / receipt generator](https://myastroapp.github.io/invoice-generator/) — free, no sign-up
